@@ -1,0 +1,10 @@
+[package]
+name = "ot-in-rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+generic-ec = {version = "0.5.0", features=["all-curves"]}
+rand = { version = "0.8.5", features = ["std", "getrandom"] }
+sha2 = "0.11.0"
+zeroize = "1.8.2"
