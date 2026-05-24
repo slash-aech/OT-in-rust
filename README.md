@@ -43,6 +43,7 @@ At the unchosen index, computing the symmetric key requires solving the **Comput
 
 
 ## Project Structure
+```
 OT-in-rust/
 ├── Cargo.toml
 └── src/
@@ -54,18 +55,14 @@ OT-in-rust/
         ├── sender.rs       # Sender state machine (Setup -> Transmit)
         └── receiver.rs     # Receiver state machine (Keys -> Decryption)
 
+```
 
 ## Dependencies(Cargo.toml)
 ```
-[dependencies]
-generic-ec = { version = "0.4.1", default-features = false, features = ["alloc"] }
-
-rand_core = { version = "0.6.4", default-features = false }
-
-hkdf = { version = "0.12.4", default-features = false }
-sha2 = { version = "0.10.8", default-features = false }
-
-chacha20poly1305 = { version = "0.10.1", default-features = false, features = ["alloc"] }
-
-zeroize = { version = "1.8.1", default-features = false, features = ["alloc", "derive"] }
+chacha20poly1305 = "0.10.1"
+generic-ec = {version = "0.5.0", features=["all-curves"]}
+hkdf = "0.13.0"
+rand = { version = "0.8.5", features = ["std", "getrandom"] }
+sha2 = "0.11.0"
+zeroize = "1.8.2"
 ```
