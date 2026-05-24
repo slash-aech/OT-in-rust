@@ -40,3 +40,32 @@ $$\text{If } b = 0: \quad c \cdot PK_0 = c \cdot (x \cdot G) = x \cdot (c \cdot 
 $$\text{If } b = 1: \quad c \cdot PK_1 = c \cdot (x \cdot G) = x \cdot (c \cdot G) = x \cdot C$$
 
 At the unchosen index, computing the symmetric key requires solving the **Computational Diffie-Hellman (CDH)** problem over $\mathbb{G}$, which is hard. Because the Sender only receives a single point $PK_0$ that appears uniformly random, they gain zero information about $b$.
+
+
+## Project Structure
+OT-in-rust/
+├── Cargo.toml
+└── src/
+    ├── lib.rs              # Crate entry point, clean type re-exports, and integration tests
+    ├── errors.rs           # Strict domain-specific protocol error definitions
+    ├── crypto.rs           # Core cryptographic primitives (HKDF, Curve Math Wrapper, AEAD)
+    └── states/
+        ├── mod.rs          # State glue module
+        ├── sender.rs       # Sender state machine (Setup -> Transmit)
+        └── receiver.rs     # Receiver state machine (Keys -> Decryption)
+
+
+## Dependencies(Cargo.toml)
+```
+[dependencies]
+generic-ec = { version = "0.4.1", default-features = false, features = ["alloc"] }
+
+rand_core = { version = "0.6.4", default-features = false }
+
+hkdf = { version = "0.12.4", default-features = false }
+sha2 = { version = "0.10.8", default-features = false }
+
+chacha20poly1305 = { version = "0.10.1", default-features = false, features = ["alloc"] }
+
+zeroize = { version = "1.8.1", default-features = false, features = ["alloc", "derive"] }
+```
